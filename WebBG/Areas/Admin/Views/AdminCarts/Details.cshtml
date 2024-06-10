@@ -1,0 +1,221 @@
+﻿@model WebBG.Models.Cart
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+    <h1>Chi tiết đơn hàng</h1>
+
+    <div class="row">
+        <hr />
+        <div class="col-md-6">
+           
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DateCreated)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DateCreated)
+                </dd>
+                <dt class="col-sm-2">
+                    Tài khoản đặt hàng
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.User.Username)
+                </dd>
+                <dt class="col-sm-2">
+                    Mã khuyến mãi
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.PromoCode)
+                </dd>
+                <dt class="col-sm-2">
+                    Họ tên khách hàng
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CustomerName)
+                </dd>
+                <dt class="col-sm-2">
+                    Địa chỉ
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CustomerAddress)
+                </dd>
+                <dt class="col-sm-2">
+                    Só điện thoại
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CustomerPhone)
+                </dd>
+                <dt class="col-sm-2">
+                    Email
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CustomerEmail)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.PaymentMethod)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.PaymentMethod)
+                </dd>
+                @if (Model.isPaid == true)
+                {
+                    <span class="col-sm-4 alert alert-success d-inline-block">
+                        Đã thanh toán
+                    </span>
+                }
+                else
+                {
+                    <span class="col-sm-4 alert alert-warning">
+                        Chưa thanh toán
+                    </span>
+                }
+               
+
+            </dl>
+        </div>
+
+        <div id="cart-details-area">
+            <!--Hiển thị chi tiết giỏ hàng-->
+        </div>
+        <br />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div>
+                        <h3>Tạm tính:  @String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", @Model.SubTotal)</h3>
+                        <h3>Khuyến mãi:  @String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", @Model.DiscountedPrice)</h3>
+                        <h3>Tổng tiền: @String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", @Model.SubTotal - @Model.DiscountedPrice)</h3>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="status-btns">
+                        <form action="~/Admin/AdminCarts/Edit" enctype="multipart/form-data" method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="CartId" />
+                            <input type="hidden" name="id" value="@Model.CartId" />
+                            <div class="form-group">
+                                <input asp-for="UserId" class="form-control" readonly hidden/>
+                                <span asp-validation-for="UserId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                               
+                                <input asp-for="DateCreated" class="form-control" readonly hidden />
+                                <span asp-validation-for="DateCreated" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                              
+                                <input asp-for="Hidden" class="form-control" readonly hidden />
+                                <span asp-validation-for="Hidden" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                
+                                <input asp-for="PromoCode" class="form-control" readonly hidden />
+                                <span asp-validation-for="PromoCode" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="SubTotal" class="form-control" readonly hidden />
+                                <span asp-validation-for="SubTotal" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="DiscountedPrice" class="form-control" readonly hidden />
+                                <span asp-validation-for="DiscountedPrice" class="text-danger"></span>
+                            </div>
+                          
+                            <div class="form-group">
+                                <input asp-for="PaymentMethod" class="form-control" readonly hidden />
+                                <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="isPaid" class="form-control" readonly hidden />
+                                <span asp-validation-for="isPaid" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="CustomerName" class="form-control" readonly hidden />
+                                <span asp-validation-for="CustomerName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="CustomerAddress" class="form-control" readonly hidden />
+                                <span asp-validation-for="CustomerAddress" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="CustomerEmail" class="form-control" readonly hidden />
+                                <span asp-validation-for="CustomerEmail" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="CustomerPhone" class="form-control" readonly hidden />
+                                <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+                            </div>
+                            @switch (Model.Status)
+                            {
+                                case 1:
+                                    <div class="form-group">
+                                        <input asp-for="Status" class="form-control" value="2" readonly hidden />
+                                        <span asp-validation-for="Status" class="text-danger"></span>
+                                    </div>
+
+                                   
+                                    <div class="form-group text-end">
+                                        <input type="submit" value="Xác nhận" class="btn btn-success" />
+                                    </div>
+                                    break;
+                                case 2:
+                                    <div class="form-group">
+                                        <input asp-for="Status" class="form-control" value="3" readonly hidden />
+                                        <span asp-validation-for="Status" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group text-end">
+                                        <input type="submit" value="Giao hàng" class="btn btn-success" />
+                                    </div>
+                                    break;
+                                case 3:
+                                    <div class="form-group">
+                                        <input asp-for="Status" class="form-control" value="4" readonly hidden />
+                                        <span asp-validation-for="Status" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group text-end">
+                                        <input type="submit" value="Giao hàng thành công" class="btn btn-success" />
+                                    </div>
+                                    break;
+                                
+                            }
+                        </form>
+                      
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        
+    </div>
+<div>
+    <a href="~/Admin/AdminCarts/Index">Back to List</a>
+</div>
+</div>
+
+@section Scripts {
+    <script src="~/js/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '@Url.Action("CartDetails", "AdminCarts")',
+                method: 'GET',
+                data: {id: '@Model.CartId'},
+                success: function (response) {
+                    $('#cart-details-area').html(response);
+                    
+                },
+                error: function (xhr, status, error) {
+                    $('#cart-details-area').html('<p class="text-danger">An error occurred while loading content 1.</p>');
+                }
+            });
+        });
+    </script>
+}

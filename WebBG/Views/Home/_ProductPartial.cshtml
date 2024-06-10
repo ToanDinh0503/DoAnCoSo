@@ -1,0 +1,64 @@
+﻿@model WebBG.ViewModels.HomeViewModel
+<div class="container">
+    @foreach (var categoryProducts in Model.CategoryProducts)
+    {
+        <div class="panel panel-info panel-prod">
+            <div class="panel-heading panel-heading-prod bg-danger text-white">
+                <i class="fa fa-spinner fa-spin"></i> Sản phẩm @categoryProducts.Key.CategoryName
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    @foreach (var item in categoryProducts.Value)
+                    {
+                        <div class="col-md-3 col-6">
+                            <div class="card">
+                                <img src="@item.Image1" class="img-thumbnail" alt="@item.Name">
+                                <div class="caption text-center">
+                                    <!-- Căn giữa nội dung -->
+                                    <p>@item.Name</p>
+                                    @if (item.DiscountPrice != null)
+                                    {
+                                        <p>Giá:  <s>@string.Format("{0:N0}", item.Price) VNĐ</s></p>
+                                        <p style="color:red">@string.Format("{0:N0}", item.DiscountPrice) VNĐ</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
+                                    }
+                                    @if (item.Quantity != 0)
+                                    {
+                                        <div class="btn-group w-100" role="group">
+                                            <!-- Button group container -->
+                                            <a href="/san-pham/@item.Link-@item.BoardGameId" class="btn btn-info w-50" role="button">Chi tiết</a>
+                                            <a class="btn btn-danger" class="addToCartBtn" href="/AddCart?ProductId=@item.BoardGameId & @item.Quantity">
+                                                Cho vào giỏ
+                                            </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+
+                                        <div class="btn-group w-100" role="group">
+                                            <!-- Button group container -->
+                                            <p class="bg-dark text-white">
+                                                Hết hàng
+                                            </p>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="panel-footer">
+                <p class="more-prod">
+                    <a href="san-pham">
+                        Xem thêm sản phẩm...
+                    </a>
+
+                </p>
+            </div>
+        </div>
+    }
+</div>

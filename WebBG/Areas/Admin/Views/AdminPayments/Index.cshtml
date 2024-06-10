@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebBG.Models.Payment>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div style="color:black">
+<h1>Quản lý Hóa Đơn</h1>
+   
+<p>
+    <button class="btn btn-inverse-warning"><a href="~/Admin/AdminPayments/Create">Tạo Mới</a></button>
+</p>
+    <div class="search-field d-none d-xl-block">
+        <form class="d-flex align-items-center h-100" action="#">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="nam/thang/ngay" name="SearchString">
+                <input type="submit" class="btn btn-success" value="Tìm Kiếm">
+            </div>
+        </form>
+    </div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cart)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cart.CartId)
+            </td>
+            <td>
+                    <button class="btn btn-inverse-warning" type="button">
+                        <a href="~/Admin/AdminPayments/Edit?id=@item.PaymentId">Edit</a>
+                    </button>
+                    <button class="btn btn-inverse-success" type="button">
+                        <a href="~/Admin/AdminPayments/Details?id=@item.PaymentId">Details</a>
+                    </button>
+                    <button class="btn btn-inverse-danger" type="button">
+                        <a href="~/Admin/AdminPayments/Delete?id=@item.PaymentId">Delete</a>
+                    </button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+@if (ViewBag.InvalidDateFormat != null && (bool)ViewBag.InvalidDateFormat)
+{
+    <script>
+        alert("Nhập sai định dạng nam/thang/ngay");
+    </script>
+}

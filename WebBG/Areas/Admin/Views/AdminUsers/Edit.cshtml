@@ -1,0 +1,75 @@
+﻿@model WebBG.Models.User
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+<h1>Edit</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form action="~/Admin/AdminUsers/Edit" method="post">
+            <input type="hidden" name="id" value="@Model.UserId" />
+            <input type="hidden" name="Userid" value="@Model.UserId" />
+            <div class="form-group">
+                <label class="control-label" name="Username">Username</label>
+                <input class="form-control" type="text"  name="Username" value="@Model.Username" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="Password">Password</label>
+                <input class="form-control" type="password"  name="Password" value="@Model.Password" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="FullName">Full Name</label>
+                <input class="form-control" type="text" name="FullName" value="@Model.FullName" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="Address">Address</label>
+                <input class="form-control" type="text"  name="Address" value="@Model.Address" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="Email">Email</label>
+                <input class="form-control" type="email"  name="Email" value="@Model.Email" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="Phone">Phone</label>
+                <input class="form-control" type="tel"  name="Phone" value="@Model.Phone" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Permission" class="control-label">Quyền</label>
+                <div>
+                    <label><input type="radio" asp-for="Permission" value="0" checked name="Permission"> User</label>
+                    <label><input type="radio" asp-for="Permission" value="1" name="Permission">Admin</label>
+                </div>
+                <span asp-validation-for="Permission" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Hidden" class="control-label">Hidden</label>
+                <div>
+                    <label><input type="radio" asp-for="Hidden" value="0" checked name="Hidden"> Hiện</label>
+                    <label><input type="radio" asp-for="Hidden" value="1" name="Hidden"> Ẩn</label>
+                </div>
+                <span asp-validation-for="Hidden" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <button type="submit" class="btn btn-danger">Sửa</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="~/Admin/AdminUsers/Index">Back to List</a>
+</div>
+</div>

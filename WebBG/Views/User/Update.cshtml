@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+@model WebBG.ViewModels.UserViewModel
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-dark text-white text-center">
+                    <h4><i class="fas fa-user"></i> Cập nhật thông tin người dùng</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Update" asp-controller="User" method="post">
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label">Tên đăng nhập:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" asp-for="Register.Username" readonly />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label">Họ và tên:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" asp-for="Register.FullName" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label">Địa chỉ:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" asp-for="Register.Address" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label">Email:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" asp-for="Register.Email" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 control-label">Số điện thoại:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" asp-for="Register.Phone" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+                                <a class="btn btn-secondary" href="@Url.Action("Info", "User")">Quay lại</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

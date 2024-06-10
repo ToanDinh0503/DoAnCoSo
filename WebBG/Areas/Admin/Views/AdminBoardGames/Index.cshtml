@@ -1,0 +1,96 @@
+﻿@model IEnumerable<WebBG.Models.BoardGame>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+<h1>Quản lý boardgames</h1>
+
+    <p>
+        <button class="btn btn-inverse-warning"><a href="~/Admin/AdminBoardGames/Create">Tạo Mới</a></button>
+    </p>
+    <div class="search-field d-none d-xl-block">
+        <form class="d-flex align-items-center h-100" action="#">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="tên sản phẩm" name="SearchString">
+                <input type="submit" class="btn btn-success" value="Tìm Kiếm">
+            </div>
+        </form>
+    </div>
+    
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Tên
+            </th>
+            <th>
+                Giá
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiscountPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+        
+            <th>
+                @Html.DisplayNameFor(model => model.Image1)
+            </th>
+            <th>
+                Thể loại
+            </th>
+            <th>
+                Nhà xuất bản
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+      
+       
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            
+       
+            <td>
+                    <img src="@Html.DisplayFor(modelItem => item.Image1)" width="100px">
+            </td>
+            
+     
+            
+            <td>
+                @item.Category.CategoryName
+            </td>
+            <td>
+                 @item.Publisher.PublisherName
+            </td>
+            <td>
+                    <button class="btn btn-inverse-warning" type="button">
+                        <a href="~/Admin/AdminBoardGames/Edit?id=@item.BoardGameId">Edit</a>
+                    </button>
+                    <button class="btn btn-inverse-success" type="button">
+                        <a href="~/Admin/AdminBoardGames/Details?id=@item.BoardGameId">Details</a>
+                    </button>
+                    <button class="btn btn-inverse-danger" type="button">
+                        <a href="~/Admin/AdminBoardGames/Delete?id=@item.BoardGameId">Delete</a>
+                    </button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

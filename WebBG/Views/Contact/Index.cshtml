@@ -1,0 +1,143 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model WebBG.ViewModels.ContactViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-heading-prod bg-danger text-white">
+                    <i class="fa fa-info-circle"></i>
+                    Thông tin cửa hàng
+                </div>
+                <div class="panel-body" style="text-align:justify">
+                    <p>
+                        Chào mừng bạn đến với Galaxy Board Game Store - nơi lựa chọn hàng đầu cho những người yêu thích trò chơi bàn!
+                    </p>
+                    <p>
+                        Tại Galaxy, chúng tôi không chỉ cung cấp các sản phẩm board game chất lượng mà còn mang đến cho bạn một trải nghiệm mua sắm độc đáo và thú vị.
+                    </p>
+                    <p>
+                        Với một bộ sưu tập đa dạng từ những trò chơi kinh điển đến những xu hướng mới nhất, chúng tôi cam kết đem lại cho bạn những lựa chọn phong phú nhất.
+                    </p>
+                    <p>
+                        Hãy ghé thăm Galaxy Board Game Store ngay hôm nay để khám phá thế giới đa dạng và phong phú của các sản phẩm và dịch vụ cho trò chơi bàn!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-heading-prod bg-danger text-white">
+                    <i class="fa fa-info-circle"></i>
+                    Khách hàng nên đọc
+                </div>
+                <div class="panel-body" style="text-align:justify">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#chatluong">
+                                Chất Lượng và An Toàn
+                            </a>
+                        </li>
+                        <li><a data-toggle="tab" href="#hoantien">Hoàn Tiền và Đổi Trả</a></li>
+                        <li><a data-toggle="tab" href="#baomat">Bảo Mật Thông Tin</a></li>
+                        <li><a data-toggle="tab" href="#giaohang">Giao Hàng Đúng Hẹn</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="chatluong" class="tab-pane fade in active">
+                            <p>
+                                Chúng tôi cam kết cung cấp những sản phẩm chất lượng cao và an toàn nhất cho thú cưng của bạn. Tất cả các sản phẩm được chọn lựa kỹ lưỡng và kiểm tra chất lượng để đảm bảo tuân thủ các tiêu chuẩn an toàn và hợp lý.
+                            </p>
+                        </div>
+                        <div id="hoantien" class="tab-pane fade">
+                            <p>
+                                Trong trường hợp sản phẩm không đáp ứng được mong đợi của bạn hoặc có bất kỳ vấn đề gì liên quan đến chất lượng, chúng tôi cam kết hoàn tiền hoặc đổi trả sản phẩm theo điều kiện cụ thể.
+                            </p>
+                        </div>
+                        <div id="baomat" class="tab-pane fade">
+                            <p>
+                                Chúng tôi cam kết bảo vệ thông tin cá nhân của khách hàng và không chia sẻ thông tin này với bất kỳ bên thứ ba nào mà không có sự đồng ý của khách hàng.
+                            </p>
+                        </div>
+                        <div id="giaohang" class="tab-pane fade">
+                            <p>
+                                Chúng tôi cam kết giao hàng đúng hẹn và đảm bảo sản phẩm được giao đến tay khách hàng một cách an toàn và nhanh chóng.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-heading-prod bg-danger text-white">
+                    <i class="fa fa-info-circle"></i>
+                    Thông tin chuyển khoản
+                </div>
+                <div class="panel-body" style="text-align:justify">
+                    <p>Vui lòng chuyển khoản thanh toán đến một trong các tài khoản sau:</p>
+                    <ul>
+                        <li><strong>Ngân hàng ABC:</strong> Số tài khoản: 1234567890</li>
+                        <li><strong>Ngân hàng XYZ:</strong> Số tài khoản: 0987654321</li>
+                        <li><strong>Ngân hàng DEF:</strong> Số tài khoản: 5432109876</li>
+                    </ul>
+                    <p>
+                        Xin vui lòng ghi rõ thông tin đơn hàng khi chuyển khoản. Đơn hàng sẽ được xác nhận sau khi nhận được thanh toán.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-heading-prod bg-danger text-white">
+                    <i class="fa fa-info-circle"></i>
+                    Phản hồi với Galaxy Board Game Store
+                </div>
+                <div class="panel-body">
+                    <div class="panel panel-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-2" for="txtusername">Họ và tên:</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="txtusername" placeholder="Nhập họ và tên">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2" for="txtemail">Email:</label>
+                                <div class="col-md-10">
+                                    <input type="email" class="form-control" id="txtemail" placeholder="Nhập địa chỉ email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2" for="txttitle">Tiêu đề:</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="txttitle" placeholder="Nhập tiêu đề">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2" for="txtdetail">Nội dung:</label>
+                                <div class="col-md-10">
+                                    <textarea class="form-control" id="txtdetail" rows="5" placeholder="Nhập nội dung"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <button type="submit" id="btnSend" class="btn btn-danger">
+                                        <i class="fa fa-external-link"></i> Gửi
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

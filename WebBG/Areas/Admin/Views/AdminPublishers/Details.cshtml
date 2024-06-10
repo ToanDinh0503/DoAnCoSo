@@ -1,0 +1,44 @@
+﻿@model WebBG.Models.Publisher
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+<h1>Details</h1>
+
+<div>
+    <h4>Publisher</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PublisherName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PublisherName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderIndex)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OrderIndex)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Link)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Link)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Hidden)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Hidden)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a href="~/Admin/AdminPublishers/Edit?id=@Model.PublisherId">Edit</a> |
+    <a href="~/Admin/AdminPublishers/Index">Back to List</a>
+</div>
+</div>

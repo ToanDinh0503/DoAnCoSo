@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+@model WebBG.ViewModels.UserViewModel
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8"> 
+            <div class="card">
+                <div class="card-header bg-dark text-white text-center">
+                    <h4><i class="fas fa-user"></i> Đăng nhập hệ thống</h4>
+                </div>
+                <div class="card-body">
+                    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewBag.ErrorMessage
+                        </div>
+                    }
+                    <form class="form-horizontal justify-content-center" asp-action="Login" asp-controller="User" method="POST">
+                        <div class="form-group row justify-content-center">
+                            <label asp-for="Register.Username" class="control-label col-md-3">Tên đăng nhập: </label> 
+                            <div class="col-md-9">
+                                <input class="form-control" asp-for="Register.Username"
+                                       placeholder="Nhập tên đăng nhập" autofocus required />
+                                <span asp-validation-for="Register.Username" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <label asp-for="Register.Password" class="control-label col-md-3">Mật khẩu: </label> 
+                            <div class="col-md-9">
+                                <input type="password" class="form-control" asp-for="Register.Password" id="password" placeholder="Nhập mật khẩu" required />
+                                <span asp-validation-for="Register.Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center align-items-center">
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-danger btn-block">Đăng nhập</button> 
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <p class="text-center">Chưa có tài khoản? <a href="dang-ky">Đăng ký</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

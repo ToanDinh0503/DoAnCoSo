@@ -1,0 +1,50 @@
+﻿@model WebBG.Models.Publisher
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+<h1>Create</h1>
+
+<h4>Publisher</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form action="~/Admin/AdminPublishers/Create" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PublisherName" class="control-label"></label>
+                <input asp-for="PublisherName" class="form-control" />
+                <span asp-validation-for="PublisherName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderIndex" class="control-label"></label>
+                <input asp-for="OrderIndex" class="form-control" />
+                <span asp-validation-for="OrderIndex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Link" class="control-label"></label>
+                <input asp-for="Link" class="form-control" />
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hidden" class="control-label">Hidden</label>
+                <div>
+                    <label><input type="radio" asp-for="Hidden" value="0" checked> Hiện</label>
+                    <label><input type="radio" asp-for="Hidden" value="1"> Ẩn</label>
+                </div>
+                <span asp-validation-for="Hidden" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="~/Admin/AdminPublishers/Index">Back to List</a>
+</div>
+
+</div>

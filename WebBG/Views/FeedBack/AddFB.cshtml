@@ -1,0 +1,101 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+@model WebBG.ViewModels.FeedbackViewModel
+<h4>Feedback</h4>
+<hr />
+@* <div class="panel-heading panel-heading-prod bg-info">
+    <i class="fa fa-spinner fa-spin"></i> Đánh giá và nhận xét
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Tên người dùng
+            </th>
+            <th>
+                Đánh giá
+            </th>
+            <th>
+                Nội dung
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListFb)
+        {
+            <tr>
+                <td>
+                    @item.User.Username
+                </td>
+
+                <td>
+                    @item.Rating
+                </td>
+                <td>
+                    @item.Content
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table> *@
+@* @foreach (var feedback in Model.ListFb)
+{
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+            <p>
+                <strong>Người đánh giá:</strong> @feedback.User.Username
+            </p>
+            <p>
+                <strong>Đánh giá:</strong> @feedback.Rating
+            </p>
+            <p>
+                <strong>Nội dung:</strong> @feedback.Content
+            </p>
+            </div>
+        </div>
+    </div>
+} *@
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddFB" asp-controller="FeedBack" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="Fb.UserId" class="control-label"></label>
+                <input type="hidden" asp-for="Fb.UserId" value="@ViewBag.UserId" />
+                <span class="form-control">@ViewContext.HttpContext.User.Identity.Name</span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fb.BoardGameId" class="control-label"></label>
+                <input type="text" asp-for="Fb.BoardGameId" class="form-control" readonly value="@Model.BoardGameId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Fb.Content" class="control-label"></label>
+                <input asp-for="Fb.Content" class="form-control" />
+                <span asp-validation-for="Fb.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fb.Rating" class="control-label"></label>
+                <input asp-for="Fb.Rating" class="form-control" type="number" min="5" max="10" />
+                <span asp-validation-for="Fb.Rating" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Fb.Datebegin" class="control-label"></label>
+                <input asp-for="Fb.Datebegin" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")" class="form-control" readonly />
+                <span asp-validation-for="Fb.Datebegin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" value="AddFB" class="btn btn-primary">Gửi</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ProdDetail" asp-controller="Product">Quay lại</a>
+</div>

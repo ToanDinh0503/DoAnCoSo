@@ -1,0 +1,65 @@
+﻿@model IEnumerable<WebBG.Models.CartDetail>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+<h1>Quản Lý Chi Tiết Đơn Hàng</h1>
+
+<p>
+    <button class="btn btn-inverse-warning"><a href="~/Admin/AdminCartDetails/Create">Tạo Mới</a></button>
+</p>
+    <div class="search-field d-none d-xl-block">
+        <form class="d-flex align-items-center h-100" action="#">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Mã giỏ hàng" name="SearchString">
+                <input type="submit" class="btn btn-success" value="Tìm Kiếm">
+            </div>
+        </form>
+    </div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cart)
+                </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cart.CartId)
+                    </td>
+            
+            <td>
+                        @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+            <td>
+                    <button class="btn btn-inverse-warning" type="button">
+                        <a href="~/Admin/AdminCartDetails/Edit?id=@item.CartDetailId">Edit</a>
+                    </button>
+                    <button class="btn btn-inverse-success" type="button">
+                        <a href="~/Admin/AdminCartDetails/Details?id=@item.CartDetailId">Details</a>
+                    </button>
+                    <button class="btn btn-inverse-danger" type="button">
+                        <a href="~/Admin/AdminCartDetails/Delete?id=@item.CartDetailId">Delete</a>
+                    </button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

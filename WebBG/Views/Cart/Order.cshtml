@@ -1,0 +1,202 @@
+﻿@model WebBG.ViewModels.CartViewModel;
+@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+    decimal totalPrice = 0; // Tạo biến để tính tổng tiền    
+    decimal discounted = 0;
+    decimal finalPrice = 0;
+    
+}
+
+
+<div class="container-fluid">
+    <div class="panel-heading panel-heading-prod bg-danger text-white"> Đơn hàng</div>
+
+    @if (Model.CartItems.Count > 0)
+    {
+        <div class="container">
+            @using (Html.BeginForm("TienHanhOrder", "Cart", FormMethod.Post))
+            {
+                <div class="row">
+                <div class="col-md-5 border mt-4 mr-1 pt-2">
+                    <h3><strong>THÔNG TIN GIAO HÀNG</strong></h3>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="fname"><i class="fa fa-user"></i> Họ tên</label>
+                                <input type="text" class="form-control" id="CustomerName" name="CustomerName" value="@Model.User.FullName">
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="fa fa-envelope"></i> Điện thoại</label>
+                                <input type="text" class="form-control" id="Phone" name="CustomerPhone" value="@Model.User.Phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="adr"><i class="fa fa-address-card-o"></i>Email</label>
+                            <input type="text" class="form-control" id="Email" name="CustomerEmail" value="@Model.User.Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="city"><i class="fa fa-institution"></i>Địa chỉ</label>
+                                <input type="text" class="form-control" id="Address" name="CustomerAddress" value="@Model.User.Address">
+                        </div>
+
+                     
+                    </div>
+                </div>
+                <div class="col-md-6 border mt-4">
+                    <div class="row">
+                        <div class="col-md-12 border mb-1 overflow-auto" style="max-height: 400px;">
+                            <table class="table table-striped table-bordered mt-2">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th colspan="2" class="text-center">Sản phẩm</th>
+                                        <th class="text-center">Số lượng</th>
+                                        <th class="text-center">Đơn giá</th>
+                                        <th class="text-center">Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model.CartItems)
+                                    {
+                                        <tr>
+                                            <td class="text-center align-middle" colspan="2">
+                                                <div style="display: flex; align-items: center;">
+                                                    <img src="@item.Product.Image1" alt="@item.Product.Name" style="width: 100px; margin-right: 10px;">
+                                                    <div>
+                                                        <p>@item.Product.Name</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <input type="number" class="txtQuantity" style="width: 50px" data-id="@item.Product.BoardGameId" value="@item.Quantity" min="1" step="1" disabled />
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                @if (item.Product.DiscountPrice != null)
+                                                {
+                                                    @String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", item.Product.DiscountPrice.GetValueOrDefault(0))
+
+                                                }
+                                                else
+                                                {
+                                                    @String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", item.Product.Price.GetValueOrDefault(0))
+                                                }
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                @{
+                                                    decimal itemTotalPrice;
+                                                    if (item.Product.DiscountPrice != null)
+                                                    {
+                                                        itemTotalPrice = item.Product.DiscountPrice.GetValueOrDefault(0) * item.Quantity;
+
+                                                    }
+                                                    else
+                                                    {
+                                                        itemTotalPrice = item.Product.Price.GetValueOrDefault(0) * item.Quantity;
+
+                                                    }
+
+                                                    totalPrice += itemTotalPrice; // Cộng vào tổng tiền
+                                                }
+                                                @String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", itemTotalPrice) @*Thành tiền*@
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-12 border pb-3">     <!-- Phân đặt hàng -->
+                            <!-- Dành cho nút Áp dụng khuyến mãi -->
+                            <div class="input-group mt-2">
+                                <input type="text" name="inputPromoCode" class="form-control" placeholder="Nhập code khuyến mãi">
+                                <div class="input-group-append">
+                                    <button id="applyPromoCode" type="button" class="btn btn-primary">Áp dụng</button>
+                                </div>
+                            </div>
+                            <br />
+
+
+                                <input type="hidden" id="promoCode" name="PromoCode" /> <!-- Lưu mã code đẫ áp dụng -->
+
+                                <!-- Dành cho nút Gửi đơn hàng -->
+                                <strong style="font-size: 1.2em;">Tạm tính: <span id="totalPrice" class="text-danger"></span></strong>
+                                <br />
+                               
+                                <strong style="font-size: 1.2em;">Khuyến mãi: <span id="discounted" class="text-danger"></span></strong>
+                                <br />
+                                <input type="hidden" id="discountedprice" name="DiscountedPrice" /> <!-- Lưu mã code đẫ áp dụng -->
+
+                                <strong style="font-size: 1.2em;">Tổng tiền: <span id="finalPrice" class="text-danger"></span></strong>
+                                <br />
+                                <button type="submit" class="btn btn-success btn-lg" style="margin-top: 10px;">
+                                    Đặt hàng (COD)
+                                </button>
+
+                                <input type="submit" name="paymentMethod" class="btn btn-success btn-lg" style="margin-top: 10px;" value="Thanh toán VNPay">
+                                <input type="hidden" name="Amount" value="@totalPrice" />
+                        </div>
+                    </div>
+
+
+
+                   
+                </div>
+            </div>
+            }
+            
+        </div>
+
+        <a href="/cart" class="btn btn-secondary">
+            Quay lại giỏ hàng
+        </a>
+    }
+
+    
+
+</div>
+
+
+@section scripts {
+    <script src="~/js/cart.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script>
+        $('#applyPromoCode').off('click').on('click', function (event) {
+            var promoCode = $('input[name="inputPromoCode"]').val();
+            document.getElementById('promoCode').value = promoCode; //lưu mã khuyến mãi vào input ẩn
+            console.log(promoCode);
+            var totalprice = @totalPrice;
+            console.log(totalprice);
+            $.ajax({
+                url: '/Cart/ApplyPromoCode',
+                dataType: 'json',
+                type: 'GET',
+                data: { code: promoCode, totalPrice: totalprice },
+                success: function (res) {
+                    if (res.status == true) {
+                        var discounted = res.discounted;
+                        var finalPrice = res.finalPrice;
+                        document.getElementById("discounted").textContent = convertToVietnameseCurrency("-" + discounted);
+                        document.getElementById('discountedprice').value = discounted;
+                        document.getElementById("finalPrice").textContent = convertToVietnameseCurrency(finalPrice);
+                        alert("Áp dụng mã khuyến mãi thành công");
+                    } else {
+                        // Hiển thị thông báo xóa giỏ hàng thất bại
+                        alert(res.error);
+                    }
+                }
+            });
+        })
+
+        
+        function convertToVietnameseCurrency(number) { //format tiền tệ việt nam (ex: 100.000 đ)
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var number = @totalPrice; // Số cần chuyển đổi
+            console.log(number)
+            var vietnameseCurrency = convertToVietnameseCurrency(number);
+            document.getElementById("totalPrice").textContent = vietnameseCurrency;
+        });
+
+    </script>
+}
+

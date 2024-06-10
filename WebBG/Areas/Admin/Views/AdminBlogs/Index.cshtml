@@ -1,0 +1,101 @@
+﻿@model IEnumerable<WebBG.Models.Blog>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div style="color:black">
+<h1>Quản lý blog</h1>
+<p>
+    <button class="btn btn-inverse-warning"><a href="~/Admin/AdminBlogs/Create">Tạo Mới</a></button>
+</p>
+    <div class="search-field d-none d-xl-block">
+        <form class="d-flex align-items-center h-100" action="#">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="tiêu đề" name="SearchString">
+                <input type="submit" class="btn btn-success" value="Tìm Kiếm">
+            </div>
+        </form>
+    </div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datebegin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Link)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Hidden)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model!=null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @{
+                            // Truncate description to 100 characters
+                            var truncatedDescription = item.Content.Length > 10 ? item.Content.Substring(0, 10) + "..." : item.Content;
+                        }
+                        @truncatedDescription
+                    </td>
+                    <td>
+                        <img src="@Html.DisplayFor(modelItem => item.Image)" width="100px">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Datebegin)
+                    </td>
+                    <td>
+                        @{
+                            // Truncate description to 100 characters
+                            var truncatedlink = item.Link.Length > 10 ? item.Link.Substring(0, 10) + "..." : item.Link;
+                        }
+                        @truncatedDescription
+                    </td>
+
+                        <td>
+                            @(item.Hidden == 0 ? "Hiện" : "Ẩn")
+                        </td>
+                    <td>
+                        @item.User?.Username
+                    </td>
+                    <td>
+                        <button class="btn btn-inverse-warning" type="button">
+                            <a href="~/Admin/AdminBlogs/Edit?id=@item.BlogId">Edit</a>
+                        </button>
+                        <button class="btn btn-inverse-success" type="button">
+                            <a href="~/Admin/AdminBlogs/Details?id=@item.BlogId">Details</a>
+                        </button>
+                        <button class="btn btn-inverse-danger" type="button">
+                            <a href="~/Admin/AdminBlogs/Delete?id=@item.BlogId">Delete</a>
+                        </button>
+                    </td>       
+                </tr>
+             }
+       }
+    </tbody>
+</table>
+</div>

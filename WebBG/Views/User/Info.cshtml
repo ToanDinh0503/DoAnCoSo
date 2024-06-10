@@ -1,0 +1,60 @@
+﻿@model WebBG.ViewModels.UserViewModel
+@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<div class="container bg-dark">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="row">
+                <nav class="col-md-12 sidebar pt-4">
+                    <ul class="nav flex-column">
+                        <li class="nav-item text-center">
+                            <a id="loadGeneralInfo" class="nav-link text-white bg-dark" >THÔNG TIN ĐĂNG NHẬP</a>
+                        </li>
+                        <li class="nav-item text-center">
+                            <a id="loadPurchaseHistory" class=" nav-link text-white bg-dark" >LỊCH SỬ MUA HÀNG</a>
+                        </li>
+                    </ul>
+                </nav>
+               
+            </div>
+        </div>
+        <div id="content-area" class="col-md-8">
+            @Html.Partial("_GetGeneralInfo", Model)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#loadGeneralInfo').click(function () {
+                $.ajax({
+                    url: '@Url.Action("GetGeneralInfo", "User")',
+                    method: 'GET',
+                    success: function(response) {
+                        $('#content-area').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        $('#content-area').html('<p class="text-danger">An error occurred while loading content 1.</p>');
+                    }
+                });
+            });
+
+            $('#loadPurchaseHistory').click(function () {
+                $.ajax({
+                    url: '@Url.Action("GetPurchaseHistory", "User")',
+                    method: 'GET',
+                    success: function (response) {
+                        $('#content-area').html(response);
+                    },
+                    error: function (xhr, status, error) {
+                        $('#content-area').html('<p class="text-danger">An error occurred while loading content 1.</p>');
+                    }
+                });
+            });
+        });
+    </script>
+}

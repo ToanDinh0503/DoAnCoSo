@@ -1,0 +1,170 @@
+﻿@model WebBG.ViewModels.UserViewModel
+@{
+    var statuses = ViewBag.MyHashTable;
+}
+<style>
+    .popup-window {
+        display: flex; /* Ẩn modal mặc định */
+        position: fixed; /* Giữ modal cố định trên màn hình */
+        z-index: 1000; /* Đảm bảo modal nằm trên tất cả nội dung khác */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Kích hoạt cuộn nếu cần */
+        background-color: rgb(0, 0, 0); /* Màu nền đen với độ mờ */
+        background-color: rgba(0, 0, 0, 0.4); /* Độ mờ nền */
+        align-items: center;
+        justify-content: center;
+    }
+
+    .detail-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* Canh giữa */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Chiều rộng của modal */
+        position: relative; /* Vị trí tương đối để các phần tử bên trong có thể định vị dễ dàng */
+        z-index: 1001; /* Đảm bảo nội dung modal nằm trên nền đen */
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+<div id="orderDetail" class="popup-window">
+    <div class="detail-content">
+        <span class="close">&times;</span>
+        <div id="modalBody">
+            <!-- Content will be loaded here -->
+
+        </div>
+    </div>
+</div>
+
+<div class="card-body bg-white overflow-auto" style="max-height: 400px;">
+    <table class="table table-striped bg-white">
+        <thead>
+            <tr>
+                <th>
+                    Mã đơn hàng
+                </th>
+                <th>
+                    Thời gian đặt
+                </th>
+                <th>
+                    Tổng tiền
+                </th>
+                <th>
+                    Trạng thái
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Carts)
+            {
+                <tr>
+                    <td>
+                        <a href="#" class="openWindowBtn" data-id="@item.CartId">@item.CartId</a>
+                    </td>
+                    <td>
+                        @item.DateCreated
+                    </td>
+                    <td>
+                        @String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}",item.SubTotal - item.DiscountedPrice)
+                    </td>
+                    <td>
+                        @foreach (var status in statuses)
+                        {
+                            if (item.Status == status.Key)
+                            {
+                                switch (status.Key)
+                                {
+                                    case 1:
+                                        <span style="color: #d98e04">@status.Value</span>
+                                        // Chờ xác nhận
+                                        break;
+                                    case 2:
+                                        <span style="color: #022ca1">@status.Value</span>
+                                        // Đã xác nhận
+                                        break;
+                                    case 3:
+                                        <span style="color: #d43504">@status.Value</span>
+                                        // Đang giao hàng
+                                        break;
+                                    case 4:
+                                        <span style="color: #13ba04">@status.Value</span>
+                                        // Giao hàng thàng công
+                                        break;
+                                    case 0:
+                                        <span style="color: #494d49">@status.Value</span>
+                                        // Đã huỷ
+                                        break;
+
+                                }
+
+                            }
+                        }
+                    </td>
+                    @if(!(item.Status == 0 || item.Status == 3 || item.Status == 4))
+                    {
+                        <td>
+                            <a href="/xac-nhan-huy/@item.CartId">Huỷ</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @*Để trống nhìn cho đẹp*@
+                        </td>
+                    }
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        
+        var modal = $('#orderDetail');
+        var modalBody = $('#modalBody');
+        modal.hide();
+
+        $('.openWindowBtn').click(function () {
+            
+            var orderId = $(this).data('id');
+            console.log(orderId);
+            modalBody.load('/Cart/DisplayOrderDetailForCustomer?id=' + orderId, function () {
+                modal.show();
+            });
+        });
+
+        $('.close').click(function () {
+            modal.hide();
+        });
+
+
+     
+    });
+
+    
+</script>

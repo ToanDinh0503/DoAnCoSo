@@ -1,0 +1,44 @@
+﻿@model WebBG.Models.Cart
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+<h1>Create</h1>
+
+<h4>Cart</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form action="~/Admin/AdminCarts/Create" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.Users"></select>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="DateCreated" class="control-label"></label>
+                <input asp-for="DateCreated" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")" class="form-control" readonly />
+                <span asp-validation-for="DateCreated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hidden" class="control-label">Hidden</label>
+                <div>
+                    <label><input type="radio" asp-for="Hidden" value="0" checked> Hiện</label>
+                    <label><input type="radio" asp-for="Hidden" value="1"> Ẩn</label>
+                </div>
+                <span asp-validation-for="Hidden" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+        <a href="~/Admin/AdminCarts/Index">Back to List</a>
+</div>
+</div>

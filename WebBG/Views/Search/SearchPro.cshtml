@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+@model WebBG.ViewModels.SearchViewModel
+
+<div class="panel panel-primary">
+    <div class="panel-heading panel-heading-prod bg-danger text-white"><i class="fa fa-spinner fa-spin"></i> Kết quả tìm kiếm</div>
+    <div class="panel-body">
+        @if (Model.Bg != null && Model.Bg.Any())
+        {
+            <div class="row">
+                <div class="col-md-12 text-center" style="margin-top: 10px" ;>
+                    <h5>Tìm thấy @Model.Bg.Count sản phẩm cho từ khóa "@ViewBag.SearchTerm"</h5>
+                </div>
+                @foreach (var item in Model.Bg)
+                {
+                    <div class="col-md-3 col-6">
+                        <div class="card">
+                            <img src="@item.Image1" class="img-thumbnail" alt="@item.Name">
+                            <div class="caption text-center">
+                                <!-- Căn giữa nội dung -->
+                                <p>@item.Name</p>
+                                <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
+                                <div class="btn-group w-100" role="group">
+                                    <!-- Button group container -->
+                                    <a href="/san-pham/@item.Link-@item.BoardGameId" class="btn btn-info w-50" role="button">Chi tiết</a>
+                                    <a class="btn btn-danger addToCartBtn" href="/san-pham" data-productid="@item.BoardGameId" data-quantity="@item.Quantity">
+                                        <i class="fa fa-spin fa-spinner"></i> Cho vào giỏ
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="text-center">Không tìm thấy sản phẩm nào.</p>
+        }
+    </div>
+</div>
+@section scripts {
+    <script src="~/js/cart.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+}

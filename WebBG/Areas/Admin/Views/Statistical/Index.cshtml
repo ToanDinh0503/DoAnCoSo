@@ -1,0 +1,112 @@
+﻿
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<h2>Thống kê</h2>
+<div class="main-panel">
+    <h3>Đơn vị tính:triệu VND</h3>
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="fromDate">Từ ngày:</label>
+                <input type="date" id="fromDate" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="toDate">Đến ngày:</label>
+                <input type="date" id="toDate" class="form-control"><!--dong code ?php echo date('Y-m-d'); lay ra ngay hien  -->
+            </div>
+        </div>
+
+        <canvas id="canvas"></canvas>
+    </div>
+    <!-- content-wrapper ends -->
+
+
+</div>
+
+@section scripts {
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="c:\users\admin\onedrive\máy tính\file lap trinh\laptrinhweb\webbg\webbg\wwwroot\admin\chart.min.js"></script>
+    <script>
+        // xu ly  cai input
+        var today = new Date().toISOString().split('T')[0];
+        //dat thoi gian cua todate gioi han lai
+        document.getElementById("toDate").setAttribute("max", today);
+        
+        var mybarchart;
+        var arrDoanhThu = [];
+        var arrLoiNhuan = [];
+        var arrDate = [];
+        function RegisterChartProduct(fromDate, toDate) {
+            const labels = arrDate;
+            $.ajax({
+                url: '/Admin/Statistical/GetStatistical', // Corrected URL
+                type: 'GET',
+                data: { fromDate: fromDate, toDate: toDate },//dua thong tin ngay vao
+                success: function (response) {
+                    arrDate = [];
+                    arrDoanhThu = [];
+                    arrLoiNhuan = [];
+                    $.each(response.data, function (i, item) {
+                        console.log(item.date)
+                        var formattedDate = moment(item.date).format('DD-MM-YYYY');
+                        console.log(formattedDate)
+                        arrDate.push(formattedDate)
+                        arrDoanhThu.push(item.doanhThu / 1000000)
+                        arrLoiNhuan.push(item.loiNhuan / 1000000)
+                    })
+                    const data = {
+                        labels: arrDate,
+                        datasets: [
+                            {
+                                label: 'Doanh thu',
+                                data: arrDoanhThu,
+                                backgroundColor: '#ffa07a',
+                            },
+                            {
+                                label: 'Loi Nhuan',
+                                data: arrLoiNhuan,
+                                backgroundColor: '#87cefa',
+                            }
+                        ]
+                    };
+                    var ctx = document.getElementById('canvas')
+                    //neu ton tai 1 chart truoc do thi huy no di
+                    if (mybarchart) {
+                        mybarchart.destroy(); 
+                    }
+                    mybarchart = new Chart(ctx, {
+                        type: 'bar',
+                        data: data,
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Chart.js Bar Chart'
+                                }
+                            }
+                        },
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+        $('#fromDate, #toDate').on('change', function () {
+            var startDate = $('#fromDate').val();
+            var endDate = $('#toDate').val();
+            RegisterChartProduct(startDate, endDate);
+        });
+
+        // Initialize the chart with default start and end dates
+        RegisterChartProduct('', '');
+    </script>
+}

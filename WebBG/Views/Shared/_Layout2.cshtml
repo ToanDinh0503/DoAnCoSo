@@ -1,0 +1,180 @@
+﻿@using System.Security.Claims
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Board Game Galaxy - Uy Tín - Chất Lượng</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+   @*  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+          crossorigin="anonymous" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+          integrity="sha384-b6lVK+yci+bfDmaY 1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e"
+          crossorigin="anonymous" />*@
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 d-flex align-items-center justify-content-center">
+                    <div>
+                        <a href="/trang-chu">
+                            <img src="~/images/logo.png" alt="logo boardgame" class="logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex align-items-center justify-content-center">
+                    <form method="get" action="/Product/search">
+                        <div class="input-group">
+                            <input type="text" name="searchTerm" class="form-control" placeholder="Nhập từ khóa tìm kiếm">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4 d-flex align-items-center justify-content-end">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="form-check form-switch">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   role="switch"
+                                   id="flexSwitchCheckChecked"
+                                   checked
+                                   onclick="myFunction()" />
+                        </div>
+                        <a href="cart" class="cart-icon">
+                            <img src="~/images/cart.png" alt="">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span class="cart-item-count">0</span>
+                        </a>
+                        <a href="dang-xuat" class="logout-icon">
+                            <img src="~/images/logout.png" alt="" style="width: 50px" ;>
+                        </a>
+                    }
+                    else
+                    {
+                        <div class="form-check form-switch">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   role="switch"
+                                   id="flexSwitchCheckChecked"
+                                   checked
+                                   onclick="myFunction()" />
+                        </div>
+                        <a href="cart" class="cart-icon">
+                            <img src="~/images/cart.png" alt="">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span class="cart-item-count">0</span>
+                        </a>
+                        <a href="dang-nhap" class="user-icon">
+                            <img src="~/images/user.png" alt="" style="width: 35px;">
+                        </a>
+                    }
+                </div>
+            </div>
+            @await Html.PartialAsync("_MenuPartial")
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
+            <div class="col-md-3">
+                @await Html.PartialAsync("_BlogPartial")
+                <div class="panel panel-success panel-post">
+                    <div class="panel-heading panel-heading-prod"><i class="fa fa-paper-plane"></i> Quảng cáo</div>
+                    <div class="panel-body panel-body-post">
+                        <img src="~/images/avalon.jpg" class="img-rounded img-adv" alt="Quảng cáo" />
+                        <marquee>Bộ Board Game chính hãng hay nhất đang rất thịnh hành trong thời gian gần đây</marquee>
+                    </div>
+                </div>
+                <div class="box-map">
+                    <div class="panel-heading panel-heading-prod"><i class="fa fa-paper-plane"></i> Bản Đồ</div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.2942411101762!2d105.8251628747142!3d21.020909538049185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab79dd0799f7%3A0x9ba950d42f69294!2sGP%20Invest%20Building!5e0!3m2!1svi!2s!4v1710084646626!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer" class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-6">
+                    <div class="box into">
+                        <h3>THÔNG TIN GIỚI THIỆU</h3>
+                        <div id="content">
+                            <p>Board Game Galaxy - Khám Phá Vũ Trụ Của Thế Giới Board Game</p>
+                            <h6>Board Game Galaxy là không gian lý tưởng cho những ai yêu thích và đam mê văn hóa board game. Với một sứ mệnh rõ ràng là kích thích sự sáng tạo, gắn kết cộng đồng, và mang lại niềm vui qua những trải nghiệm chơi game đầy thú vị, Shop Board Game Galaxy không ngừng nỗ lực để trở thành điểm đến lý tưởng cho cộng đồng người chơi board game.</h6>
+                            <p>Sứ Mệnh và Giá Trị Cốt Lõi</p>
+                            <h6>Board Game Galaxy cam kết mang đến cho khách hàng những trải nghiệm mua sắm thú vị và thoải mái nhất. Chúng tôi không chỉ cung cấp các sản phẩm chất lượng với mức giá cạnh tranh, mà còn tạo ra một không gian giao lưu, học hỏi và chia sẻ đam mê cho cộng đồng người chơi.</h6>
+                            <p>Các Sản Phẩm và Dịch Vụ</p>
+                            <h6>Board Game Galaxy tự hào là địa điểm mua sắm lý tưởng cho mọi người yêu thích board game, từ những game kinh điển đến những xu hướng mới nhất trên thị trường. Ngoài ra, chúng tôi cũng cung cấp các dịch vụ như tổ chức sự kiện, hướng dẫn chơi game, và tư vấn chọn lựa board game phù hợp.</h6>
+                            <p>Kết Nối Với Chúng Tôi</p>
+                            <h6>Hãy tham gia cộng đồng Board Game Galaxy để cập nhật những thông tin mới nhất về board game, các sự kiện, và các chương trình khuyến mãi hấp dẫn.</h6>
+                            <p>Địa chỉ: P301, tầng 3, tòa nhà GP Invest, số 170 La Thành, Phường Ô Chợ Dừa, Quận Đống Đa, Thành Phố Hà Nội.</p>
+                            <p>Điện thoại: +8424 - 7303.0222</p>
+                            <p>Fax: +8424 - 6277.6419</p>
+                            <p>Email: hello@boardgamegalaxy.com</p>
+                            <h6>Hãy đến và khám phá vũ trụ của thế giới board game tại Board Game Galaxy ngay hôm nay!</h6>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger intent="WELCOME"
+                  chat-title="test_ai_chat"
+                  agent-id="70e68a01-28c0-43ee-b288-cfc312c1f465"
+                  language-code="en"
+                  icon="https://i.pinimg.com/564x/c5/6a/d1/c56ad191ecd2c53e6a2f9241ce8c4c02.jpg"></df-messenger>
+
+
+    <script src="~/js/site.js"></script>
+    <script src="~/js/index.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/cart.js"></script>
+    <script>
+        //phan de gui vao controller
+        var slider = document.getElementById("priceRange");
+
+        //lay ra gia cao nhat phan hien thi
+        var maxValue = document.getElementById("maxPriceValue");
+
+        //hien thi gia trị hiện tại của so tiền
+        maxValue.innerHTML = numberWithCommas(slider.max); // Đảm bảo giá trị max hiển thị là 10,000,000
+
+
+        //them thay doi khi gia tri no thay doi
+        slider.addEventListener("input", function () {
+            maxValue.innerHTML = numberWithCommas(this.value);
+        });
+        //thay doi khi keo chuout cho phan slider
+        slider.addEventListener("mousemove", function () {
+            //tinh toan gia tri cua thanh truot hien tai so voi toi da
+            var x = slider.value / slider.max;
+        });
+
+
+        // Hàm định dạng giá tiền
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+            integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+            crossorigin="anonymous"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

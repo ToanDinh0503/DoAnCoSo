@@ -1,0 +1,25 @@
+﻿@model WebBG.ViewModels.ProductViewModel;
+
+<div class="panel panel-primary panel-post">
+    <div class="panel-heading panel-heading-prod">
+        <i class="fa fa-comments-o"></i> Bài viết về Board Game
+    </div>
+    <div class="panel-body panel-body-post">
+        @foreach (var item in Model.Blogs.Take(2))
+        {
+            <h5><a href="/blog/@item.Link-@item.BlogId">@item.Title</a></h5>
+            <h6 class="card-text" style="margin-bottom:15px">
+                @(
+                    item.Content.Length > 100 ? item.Content.Substring(0, 100) + "..." : item.Content
+                    )
+            </h6>
+        }
+    </div>
+    <div class="panel-footer">
+        <p class="more-prod">
+            <a href="/blog" >
+                Xem tất cả bài viết...
+            </a>
+        </p>
+    </div>
+</div>

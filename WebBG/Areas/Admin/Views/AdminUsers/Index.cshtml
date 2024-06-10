@@ -1,0 +1,82 @@
+﻿@model IEnumerable<WebBG.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+    <div>
+        <h1 class="card-title">Bảng quản lý người dùng</h1>
+    <button class="btn btn-inverse-warning"><a href="~/Admin/AdminUsers/Create">Tạo Mới</a></button>
+        <p class="card-description"></p>
+        <div class="search-field d-none d-xl-block">
+            <form class="d-flex align-items-center h-100" action="#">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="tên user" name="SearchString">
+                    <input type="submit" class="btn btn-success" value="Tìm Kiếm">
+                </div>
+            </form>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th> User </th>
+                    <th> Mật Khẩu </th>
+                    <th> Tên </th>
+                    <th> Địa chỉ </th>
+                    <th> Email </th>
+                    <th> Số Điện thoại </th>
+                    <th> Quyền </th>
+                    <th> Hidden </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Username)
+                        </td>
+                        <td>
+                            @* @Html.DisplayFor(modelItem => item.Password) *@
+                        </td> 
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @(item.Permission == 0 ? "user" : "admin")
+                        </td>
+                        <td>
+                            @(item.Hidden == 0 ? "Hiện" : "Ẩn")
+                        </td>
+                        <td>
+                            <button class="btn btn-inverse-warning" type="button"><a href="~/Admin/AdminUsers/Edit?id=@item.UserId">Edit</a></button>
+
+
+                            <button class="btn btn-inverse-success" type="button">
+                                <a href="~/Admin/AdminUsers/Details?id=@item.UserId">Details</a>
+                            </button>
+                            <button class="btn btn-inverse-danger" type="button">
+                                <a href="~/Admin/AdminUsers/Delete?id=@item.UserId">Delete</a>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>  
+    </div>
+    </div>
+
+
+
+

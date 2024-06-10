@@ -1,0 +1,121 @@
+﻿@model IEnumerable<WebBG.Models.Cart>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var statuses = ViewBag.MyHashTable;
+}
+<div style="color:black">
+<h1>Quản lý Đơn hàng</h1>
+
+@* <p>
+    <button class="btn btn-inverse-warning"><a href="~/Admin/AdminCarts/Create">Tạo Mới</a></button>
+</p> *@
+
+<div class="container">
+    <div class="row">
+            <div class="col-md-10">
+                <form class="d-flex align-items-center h-100" action="#">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Mã đơn hàng" name="SearchString">
+                        <input type="submit" class="btn btn-success" value="Tìm Kiếm">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2">
+                <form asp-action="Loc" asp-controller="AdminCarts" method="get">
+                    <div class="input-group">
+                        <select name="Status" class="form-control">
+                            <option value="">Tất cả</option>
+                            @if (statuses != null)
+                            {
+                                @foreach (var item in statuses)
+                                {
+                                    <option value="@item.Key">@item.Value</option>
+                                }
+                            }
+
+                        </select>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-success">Lọc</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CartId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CartId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @foreach (var status in statuses)
+                {
+                    if(item.Status == status.Key)
+                    {
+                        switch (status.Key)
+                        {
+                            case 1:
+                                <span style="color: #d98e04">@status.Value</span> // Chờ xác nhận
+                                break;
+                            case 2:
+                                <span style="color: #022ca1">@status.Value</span> // Đã xác nhận
+                                break;
+                            case 3:
+                                <span style="color: #d43504">@status.Value</span> // Đang giao hàng
+                                break;
+                            case 4:
+                               <span style="color: #13ba04">@status.Value</span> // Giao hàng thàng công
+                                break;
+                            case 0:
+                                <span style="color: #494d49">@status.Value</span> // Đã huỷ
+                                break;
+                                
+                        }
+                      
+                    }
+                }
+            </td>
+            <td>
+                @* <button class="btn btn-inverse-warning" type="button">
+                    <a href="~/Admin/AdminCarts/Edit?id=@item.CartId">Edit</a>
+                </button> *@
+                <button class="btn btn-inverse-success" type="button">
+                    <a href="~/Admin/AdminCarts/Details?id=@item.CartId">Details</a>
+                </button>
+                @* <button class="btn btn-inverse-danger" type="button">
+                    <a href="~/Admin/AdminCarts/Delete?id=@item.CartId">Delete</a>
+                </button> *@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

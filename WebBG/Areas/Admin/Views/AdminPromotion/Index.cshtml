@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebBG.Models.Promotion>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div style="color:black">
+<h1>Quản lý khuyến mãi</h1>
+
+    <p>
+        <button class="btn btn-inverse-warning"><a href="~/Admin/AdminPromotion/Create">Tạo Mới</a></button>
+    </p>
+<div class="search-field d-none d-xl-block">
+    <form class="d-flex align-items-center h-100" action="#">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Code khuyến mãi" name="SearchString">
+            <input type="submit" class="btn btn-success" value="Tìm Kiếm">
+        </div>
+    </form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PromoCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiscountPercent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiscountValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpirationDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PromoCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountPercent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpirationDate)
+            </td>
+            <td>
+                <button class="btn btn-inverse-warning" type="button">
+                    <a href="~/Admin/AdminPromotion/Edit?id=@item.PromoId">Edit</a>
+                </button>
+                <button class="btn btn-inverse-success" type="button">
+                        <a href="~/Admin/AdminPromotion/Details?id=@item.PromoId">Details</a>
+                </button>
+                <button class="btn btn-inverse-danger" type="button">
+                        <a href="~/Admin/AdminPromotion/Delete?id=@item.PromoId">Delete</a>
+                </button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

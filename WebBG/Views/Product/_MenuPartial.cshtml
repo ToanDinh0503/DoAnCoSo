@@ -1,0 +1,44 @@
+﻿@using System.Security.Claims
+
+@model WebBG.ViewModels.ProductViewModel;
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand/logo -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            @foreach (var item in Model.Menus)
+            {
+                <li class="item"><a href="/@item.Link" class="nav-link">@item.Title</a></li>
+            }
+        </ul>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+        @if (User.Identity.IsAuthenticated)
+        {
+            string username = User.Identity.Name;
+            string permission = User.FindFirst(ClaimTypes.Role)?.Value;
+            if (permission == "1")
+            {
+                <li class="item">
+                    <a href="~/Admin/AdminBoardgames/Index" class="nav-link">
+                        <span class="glyphicon glyphicon-user"></span>
+                        Quan lý Admin
+                    </a>
+                </li>
+            }
+            <li class="item">
+                <a href="/thong-tin" class="nav-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                    @username
+                </a>
+            </li>
+        }
+        else
+        {
+            <!-- Điều chỉnh cho phần không xác thực -->
+        }
+    </ul>
+</nav>

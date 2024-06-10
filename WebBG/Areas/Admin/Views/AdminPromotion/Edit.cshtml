@@ -1,0 +1,81 @@
+﻿@model WebBG.Models.Promotion
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script src="~/js/jquery.min.js"></script>
+
+<h2>Edit</h2>
+
+<h4>Promotion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form action="~/Admin/AdminPromotion/Edit" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PromoId" />
+            <input type="hidden" name="Id" value="@Model.PromoId" />
+            <div class="form-group">
+                <label asp-for="PromoCode" class="control-label"></label>
+                <input asp-for="PromoCode" class="form-control" />
+                <span asp-validation-for="PromoCode" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Chọn cách giảm giá:</label><br />
+                <input type="radio" id="discountPercentRadio" name="discountType" value="Percent" checked>
+                <label for="discountPercentRadio">Theo phần trăm</label><br />
+                <input type="radio" id="discountValueRadio" name="discountType" value="Value">
+                <label for="discountValueRadio">Theo số tiền</label>
+            </div>
+
+            <div class="form-group" id="discountPercentDiv">
+                <label asp-for="DiscountPercent" class="control-label"></label>
+                <input asp-for="DiscountPercent" class="form-control" />
+                <span asp-validation-for="DiscountPercent" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="discountValueDiv" style="display:none;">
+                <label asp-for="DiscountValue" class="control-label"></label>
+                <input asp-for="DiscountValue" class="form-control" />
+                <span asp-validation-for="DiscountValue" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ExpirationDate" class="control-label"></label>
+                <input asp-for="ExpirationDate" class="form-control" />
+                <span asp-validation-for="ExpirationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('input[type=radio][name=discountType]').change(function () {
+            if (this.value === 'Percent') {
+                $('#discountPercentDiv').show();
+                $('#discountValueDiv').hide();
+            }
+            else if (this.value === 'Value') {
+                $('#discountPercentDiv').hide();
+                $('#discountValueDiv').show();
+            }
+        });
+    });
+    $('form').submit(function () {
+        var selectedOption = $('input[name=discountType]:checked').val();
+        if (selectedOption === 'Percent') {
+            $('#DiscountValue').prop('disabled', true);
+        } else if (selectedOption === 'Value') {
+            $('#DiscountPercent').prop('disabled', true);
+        }
+    });
+</script>

@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model WebBG.ViewModels.ProductViewModel
+<div class="panel panel-primary">
+    <div class="panel-heading panel-heading-prod"> Tất cả sản phẩm thuộc nhóm: @Model.cateName</div>
+    <div class="panel-body">
+        <div class="row">
+            @foreach (var item in Model.Bg)
+            {
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="@item.Image1" class="img-rounded" alt="@item.Name">
+                        <div class="caption">
+                            <h4>@item.Name</h4>
+                            <p>Giá: @string.Format("{0:N0}", item.Price) VNĐ</p>
+                            <p>
+                                <!-- Chuyển hướng sang trang chi tiết sản phẩm với ID sản phẩm -->
+                                <a href="san-pham/@item.Link-@item.BoardGameId" class="btn btn-info" role="button"><i class="fa fa-rocket"></i> Chi tiết</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="container">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
