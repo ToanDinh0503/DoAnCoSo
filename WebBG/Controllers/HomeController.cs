@@ -18,17 +18,18 @@ namespace WebBG.Controllers
             var menus = await _context.Menus.Where(m => m.Hidden == 0).OrderBy(m => m.OrderIndex).ToListAsync();
             var blogs = await _context.Blogs.Where(m => m.Hidden == 0).OrderBy(m => m.OrderIndex).Take(2).ToListAsync();
             var slides = await _context.Sliders.Where(m => m.Hidden == 0).OrderBy(m => m.OrderIndex).ToListAsync();
-
+            var categories = await _context.Categories.ToListAsync();
             var viewModel = new HomeViewModel
             {
                 Menus = menus,
                 Blogs = blogs,
                 Sliders = slides,
-                CategoryProducts = new Dictionary<Category, List<BoardGame>>()
+                CategoryProducts = new Dictionary<Category, List<BoardGame>>(),
+                Categories = categories
             };
 
             // Lấy danh sách tất cả các danh mục có sẵn trong cơ sở dữ liệu
-            var categories = await _context.Categories.ToListAsync();
+            
 
             // Duyệt qua từng danh mục để lấy sản phẩm
             foreach (var category in categories)

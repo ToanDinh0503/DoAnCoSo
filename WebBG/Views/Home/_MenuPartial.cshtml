@@ -10,34 +10,9 @@
         <ul class="navbar-nav">
             @foreach (var item in Model.Menus)
             {
-                <li class="item"><a href="/@item.Link" class="nav-link">@item.Title</a></li>
+                <li class="item mr-3 ml-3"><a href="/@item.Link" class="nav-link">@item.Title</a></li>
             }
         </ul>
     </div>
-    <ul class="navbar-nav navbar-right">
-        @if (User.Identity.IsAuthenticated)
-        {
-            string username = User.Identity.Name;
-            string permission = User.FindFirst(ClaimTypes.Role)?.Value;
-            if (permission == "1")
-            {
-                <li class="item">
-                    <a href="~/Admin/AdminBoardgames/Index" class="nav-link">
-                        <span class="glyphicon glyphicon-user"></span>
-                        Quan lý Admin
-                    </a>
-                </li>
-            }
-            <li class="item">
-                <a href="/thong-tin" class="nav-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                     @username
-                </a>
-            </li>
-        }
-        else
-        {
-            <!-- Điều chỉnh cho phần không xác thực -->
-        }
-    </ul>
+    
 </nav>

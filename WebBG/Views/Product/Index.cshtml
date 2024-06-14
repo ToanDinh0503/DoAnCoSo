@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     int NumOfQuality = 1;
 }
 @model WebBG.ViewModels.ProductViewModel
@@ -104,3 +104,34 @@
         </ul>
     </div>
 </div>
+
+@section scripts {
+    <script>
+        //phan de gui vao controller
+        var slider = document.getElementById("priceRange");
+
+        //lay ra gia cao nhat phan hien thi
+        var maxValue = document.getElementById("maxPriceValue");
+
+        //hien thi gia trị hiện tại của so tiền
+        maxValue.innerHTML = numberWithCommas(slider.max); // Đảm bảo giá trị max hiển thị là 10,000,000
+
+
+        //them thay doi khi gia tri no thay doi
+        slider.addEventListener("input", function () {
+            maxValue.innerHTML = numberWithCommas(this.value);
+        });
+        //thay doi khi keo chuout cho phan slider
+        slider.addEventListener("mousemove", function () {
+            //tinh toan gia tri cua thanh truot hien tai so voi toi da
+            var x = slider.value / slider.max;
+        });
+
+
+        // Hàm định dạng giá tiền
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+    </script>
+}

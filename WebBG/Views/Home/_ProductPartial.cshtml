@@ -1,11 +1,39 @@
 ﻿@model WebBG.ViewModels.HomeViewModel
+
+
+<div class="container">
+    <div class="row_intro">
+        <div class="col-md-4">
+            <div class="intro">
+                <p id="title">Miễn phí giao hàng</p>
+                <p id="desc">100% Authentic</p>
+                <p id="cont">Đơn hàng trên 300.000</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="intro">
+                <p id="title">Giao hàng hỏa tốc</p>
+                <p id="desc">Express delivery</p>
+                <p id="cont">SHIP hỏa tốc nhanh chóng 1h, nhận hàng trong nội thành HCM</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="intro">
+                <p id="title">Hỗ trợ 24/24</p>
+                <p id="desc">Supporting 24/24</p>
+                <p id="cont">Hotline: 092774920</p>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     @foreach (var categoryProducts in Model.CategoryProducts)
     {
         <div class="panel panel-info panel-prod">
-            <div class="panel-heading panel-heading-prod bg-danger text-white">
+            <div class="category-title panel-heading panel-heading-prod text-white" style="background-color: #1db31d">
                 <i class="fa fa-spinner fa-spin"></i> Sản phẩm @categoryProducts.Key.CategoryName
             </div>
+
             <div class="panel-body">
                 <div class="row">
                     @foreach (var item in categoryProducts.Value)

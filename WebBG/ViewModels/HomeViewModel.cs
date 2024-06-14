@@ -8,6 +8,8 @@ namespace WebBG.ViewModels
         public List<Menu> Menus { get; set; }
         public List<Blog> Blogs { get; set; }
         public List<Slider> Sliders { get; set; }
+
+        public List<Category> Categories { get; set; }
         public Dictionary<Category, List<BoardGame>> CategoryProducts { get; set; }
     }
 }

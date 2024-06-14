@@ -13,22 +13,6 @@
             }
         </ul>
     </div>
-    <ul class="nav navbar-nav navbar-right">
-        @if (User.Identity.IsAuthenticated)
-        {
-            string username = User.Identity.Name;
-            string permission = User.FindFirst(ClaimTypes.Role)?.Value;
-            <li class="item">
-                <a href="/thong-tin" class="nav-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                    @username
-                </a>
-            </li>
-        }
-        else
-        {
-            <!-- Điều chỉnh cho phần không xác thực -->
-        }
-    </ul>
+    
 </nav>
 
