@@ -19,7 +19,7 @@
             z-index: 99; /* Make sure it does not overlap */
             border: none; /* Remove borders */
             outline: none; /* Remove outline */
-            background-color: red; /* Set a background color */
+            background-color: #f5ff6b; /* Set a background color */
             color: white; /* Text color */
             cursor: pointer; /* Add a mouse pointer on hover */
             padding: 15px; /* Some padding */
@@ -28,7 +28,7 @@
         }
 
             #btn-scroll-to-top:hover {
-            background-color: #555; /* Add a dark-grey background on hover */
+                background-color: #eeff00; /* Add a dark-grey background on hover */
         }
 
         .container {
@@ -66,6 +66,27 @@
 
         .list-item:hover {
             background-color: #e0e0e0; /* Grey color on hover */
+        }
+
+        .btn-login {
+            background-color: #ffffff; /* Blue */
+            border: 1px;
+        }
+
+        .btn-sign-up {
+            background-color: #212529; /* Green */
+            color: #1db31d;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -124,9 +145,10 @@
                             <box-icon name='cart-alt'></box-icon>
                             <span class="cart-item-count">0</span>
                         </a>
-                        <a href="dang-nhap" class="user-icon">
-                            <box-icon name='user' type='solid'></box-icon>
-                        </a>
+                        <a href="dang-nhap" class="btn btn-login">Đăng nhập</a>
+                        <a href="dang-ky" class="btn btn-sign-up">Đăng ký</a>
+                        
+                        
                     }
                 </div>
             </div>
@@ -140,15 +162,15 @@
                 </div>
                 <div class="col-md-12">
                     @await Html.PartialAsync("_BlogPartial")
-                    <div class="panel panel-success panel-post">
-                        <div class="panel-heading panel-heading-prod"><i class="fa fa-paper-plane"></i> Quảng cáo</div>
-                        <div class="panel-body panel-body-post">
+                    <div class="panel panel-post">
+                        <div class="panel-heading panel-heading-prod" style="background-color: #1db31d"><i class="fa fa-paper-plane"></i> Quảng cáo</div>
+                        <div class="panel-body panel-success panel-body-post">
                             <img src="~/images/avalon.jpg" class="img-rounded img-adv" alt="Quảng cáo" />
                             <marquee>Bộ Board Game chính hãng hay nhất đang rất thịnh hành trong thời gian gần đây</marquee>
                         </div>
                     </div>
                     <div class="box-map">
-                        <div class="panel-heading panel-heading-prod"><i class="fa fa-paper-plane"></i> Bản Đồ</div>
+                        <div class="panel-heading panel-heading-prod" style="background-color: #1db31d"><i class="fa fa-paper-plane"></i> Bản Đồ</div>
                         <div class="map-container">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.2942411101762!2d105.8251628747142!3d21.020909538049185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab79dd0799f7%3A0x9ba950d42f69294!2sGP%20Invest%20Building!5e0!3m2!1svi!2s!4v1710084646626!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>

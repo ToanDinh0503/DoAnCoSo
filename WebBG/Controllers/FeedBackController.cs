@@ -29,7 +29,8 @@ namespace WebBG.Controllers
             };
             viewModel.Fb.Datebegin = DateTime.Now;
             var userName = User.Identity.Name;
-            ViewBag.UserId = _context.Feedbacks.FirstOrDefault(x=>x.User.FullName==userName).UserId;
+            
+            ViewBag.UserId = _context.Users.FirstOrDefault(x=>x.FullName.Equals(userName)).UserId;
             // Lấy thông tin về trò chơi từ context
             
             return View(viewModel);

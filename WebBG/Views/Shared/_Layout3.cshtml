@@ -28,27 +28,47 @@
             transition: background-color 0.3s;
         }
 
-            .list-item span a {
-                text-decoration: none; /* Remove underline */
-                color: inherit; /* Inherit color from parent */
-            }
+        .list-item span a {
+            text-decoration: none; /* Remove underline */
+            color: inherit; /* Inherit color from parent */
+        }
 
-            .list-item i {
-                font-size: 1.5rem;
-                margin-right: 10px;
-            }
+        .list-item i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
 
-            .list-item span {
-                flex-grow: 1;
-            }
+        .list-item span {
+            flex-grow: 1;
+        }
 
-            .list-item .arrow {
-                margin-left: auto;
-            }
+        .list-item .arrow {
+            margin-left: auto;
+        }
 
-            .list-item:hover {
-                background-color: #e0e0e0; /* Grey color on hover */
-            }
+        .list-item:hover {
+            background-color: #e0e0e0; /* Grey color on hover */
+        }
+
+        .btn-login {
+            background-color: #ffffff; /* Blue */
+            border: 1px;
+        }
+
+        .btn-sign-up {
+            background-color: #212529; /* Green */
+            color: #1db31d;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body data-bs-theme="light">
@@ -106,9 +126,8 @@
                             <box-icon name='cart-alt'></box-icon>
                             <span class="cart-item-count">0</span>
                         </a>
-                        <a href="dang-nhap" class="user-icon">
-                            <box-icon name='user' type='solid'></box-icon>
-                        </a>
+                        <a href="dang-nhap" class="btn btn-login">Đăng nhập</a>
+                        <a href="dang-ky" class="btn btn-sign-up">Đăng ký</a>
                     }
                 </div>
             </div>
