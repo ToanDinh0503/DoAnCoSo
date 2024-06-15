@@ -8,9 +8,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
-    
+    <!--font chữ-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
         #btn-scroll-to-top {
             display: none; /* Hidden by default */
             position: fixed; /* Fixed/sticky position */
@@ -88,6 +95,41 @@
             transform: translateY(0);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
+        .footer {
+            background-color: #212529;
+            color: #ffffff;
+            padding: 40px 0;
+        }
+
+        .footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer .col {
+            flex: 1;
+            margin: 10px;
+            min-width: 250px;
+        }
+
+        .footer h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .footer p, .footer h6 {
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .footer .contact-info p {
+            margin-bottom: 5px;
+        }
+        
+
+       
     </style>
 </head>
 <body data-bs-theme="light">
@@ -131,22 +173,22 @@
                         <a href="/thong-tin">@username</a>
                         
 
-                        <a href="cart" class="cart-icon">
+                        <a href="/cart" class="cart-icon">
                             <box-icon name='cart-alt'></box-icon>
                             <span class="cart-item-count">0</span>
                         </a>
-                        <a href="dang-xuat" class="logout-icon">
+                        <a href="/dang-xuat" class="logout-icon">
                             <box-icon name='log-out'></box-icon>
                         </a>
                     }
                     else
                     {
-                        <a href="cart" class="cart-icon">
+                        <a href="/cart" class="cart-icon">
                             <box-icon name='cart-alt'></box-icon>
                             <span class="cart-item-count">0</span>
                         </a>
-                        <a href="dang-nhap" class="btn btn-login">Đăng nhập</a>
-                        <a href="dang-ky" class="btn btn-sign-up">Đăng ký</a>
+                        <a href="/dang-nhap" class="btn btn-login">Đăng nhập</a>
+                        <a href="/dang-ky" class="btn btn-sign-up">Đăng ký</a>
                         
                         
                     }
@@ -179,7 +221,29 @@
             </div>
         </div>
 
-        <div id="footer" class="container-fluid">
+        <div class="footer">
+            <div class="container mt-5">
+                <div class="col">
+                    <h3>THÔNG TIN GIỚI THIỆU</h3>
+                    <p>Board Game Galaxy - Khám Phá Vũ Trụ Của Thế Giới Board Game</p>
+                    <h6>Board Game Galaxy là không gian lý tưởng cho những ai yêu thích và đam mê văn hóa board game. Với một sứ mệnh rõ ràng là kích thích sự sáng tạo, gắn kết cộng đồng, và mang lại niềm vui qua những trải nghiệm chơi game đầy thú vị, Shop Board Game Galaxy không ngừng nỗ lực để trở thành điểm đến lý tưởng cho cộng đồng người chơi board game.</h6>
+                </div>
+                <div class="col">
+                    <h3>SỨ MỆNH VÀ GIÁ TRỊ CỐT LÕI</h3>
+                    <h6>Board Game Galaxy cam kết mang đến cho khách hàng những trải nghiệm mua sắm thú vị và thoải mái nhất. Chúng tôi không chỉ cung cấp các sản phẩm chất lượng với mức giá cạnh tranh, mà còn tạo ra một không gian giao lưu, học hỏi và chia sẻ đam mê cho cộng đồng người chơi.</h6>
+                    <h6>Board Game Galaxy tự hào là địa điểm mua sắm lý tưởng cho mọi người yêu thích board game, từ những game kinh điển đến những xu hướng mới nhất trên thị trường. Ngoài ra, chúng tôi cũng cung cấp các dịch vụ như tổ chức sự kiện, hướng dẫn chơi game, và tư vấn chọn lựa board game phù hợp.</h6>
+                </div>
+                <div class="col contact-info">
+                    <h3>KẾT NỐI VỚI CHÚNG TÔI</h3>
+                    <p>Địa chỉ: P301, tầng 3, tòa nhà GP Invest, số 170 La Thành, Phường Ô Chợ Dừa, Quận Đống Đa, Thành Phố Hà Nội.</p>
+                    <p>Điện thoại: +8424 - 7303.0222</p>
+                    <p>Fax: +8424 - 6277.6419</p>
+                    <p>Email: hello@boardgamegalaxy.com</p>
+                    <h6>Hãy đến và khám phá vũ trụ của thế giới board game tại Board Game Galaxy ngay hôm nay!</h6>
+                </div>
+            </div>
+        </div>
+        @* <div id="footer" class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-6">
                     <div class="box into">
@@ -203,7 +267,7 @@
                 </div>
 
             </div>
-        </div>
+        </div> *@
     </div>
     <div class="scroll-to-top">
         <button id="btn-scroll-to-top" onclick="topFunction()"><box-icon name='chevrons-up'></box-icon></button>

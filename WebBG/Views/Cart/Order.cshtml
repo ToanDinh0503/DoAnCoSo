@@ -9,7 +9,7 @@
 
 
 <div class="container-fluid">
-    <div class="panel-heading panel-heading-prod bg-danger text-white"> Đơn hàng</div>
+    <div class="panel-heading panel-heading-prod text-white" style="background-color: #1db31d"> Đơn hàng</div>
 
     @if (Model.CartItems.Count > 0)
     {
@@ -107,7 +107,7 @@
                             <div class="input-group mt-2">
                                 <input type="text" name="inputPromoCode" class="form-control" placeholder="Nhập code khuyến mãi">
                                 <div class="input-group-append">
-                                    <button id="applyPromoCode" type="button" class="btn btn-primary">Áp dụng</button>
+                                    <button id="applyPromoCode" type="button" class="btn btn-dark">Áp dụng</button>
                                 </div>
                             </div>
                             <br />

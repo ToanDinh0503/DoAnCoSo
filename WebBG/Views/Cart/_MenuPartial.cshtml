@@ -14,25 +14,5 @@
             }
         </ul>
     </div>
-    <ul class="navbar-nav navbar-right">
-        @if (User.Identity.IsAuthenticated)
-        {
-            string username = User.Identity.Name;
-            string permission = User.FindFirst(ClaimTypes.Role)?.Value;
-            if (permission == "1")
-            {
-                <li class="item">
-                    <a href="~/Admin/AdminBoardgames/Index" class="nav-link">
-                        <span class="glyphicon glyphicon-user"></span>
-                        Quan lý Admin
-                    </a>
-                </li>
-            }
-            
-        }
-        else
-        {
-            <!-- Điều chỉnh cho phần không xác thực -->
-        }
-    </ul>
+    
 </nav>

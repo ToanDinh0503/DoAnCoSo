@@ -5,7 +5,7 @@
 
 @foreach (var item in Model.Bg)
 {
-    <div class="panel-heading panel-heading-prod bg-danger text-white">Chi tiết sản phẩm</div>
+    <div class="panel-heading panel-heading-prod text-white" style="background-color: #1db31d">Chi tiết sản phẩm</div>
     <div class="container-fluid">
         <div class="container">
             <div class="row">
@@ -68,7 +68,7 @@
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <div class="col-md-8 col-md-offset-4">
-                                            <a class="btn btn-danger" href="/AddCart?ProductId=@item.BoardGameId & @item.Quantity"><i class="fa fa-spin fa-spinner"></i> Thêm vào giỏ hàng</a>
+                                            <a class="btn btn-dark" href="/AddCart?ProductId=@item.BoardGameId & @item.Quantity"><i class="fa fa-spin fa-spinner"></i> Thêm vào giỏ hàng</a>
                                         </div>
                                     </div>
                                 </form>
@@ -88,7 +88,7 @@
         </div>
 
         <div class="card">
-            <div class="panel-heading panel-heading-prod bg-danger text-white"><i class="fa fa-spinner fa-spin"></i> Thông tin chi tiết</div>
+            <div class="panel-heading panel-heading-prod text-white" style="background-color: #1db31d">Thông tin chi tiết</div>
             <div class="card-body">
                 <p class="text-center">
                     @Html.Raw(item.Description)
@@ -97,16 +97,7 @@
         </div>
 
         <div class="card">
-            <div class="panel-heading panel-heading-prod bg-danger text-white"><i class="fa fa-spinner fa-spin"></i> Các sản phẩm liên quan</div>
-            <div class="card-body">
-                <!-- Display related products here -->
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="panel-heading panel-heading-prod bg-danger text-white">
-                <i class="fa fa-spinner fa-spin"></i> Danh sách đánh giá và nhận xét
-            </div>
+            <div class="panel-heading panel-heading-prod text-white" style="background-color: #1db31d"> Danh sách đánh giá và nhận xét </div>
             <div class="card-body">
                 <table class="table table-striped">
                     <thead>
@@ -144,14 +135,14 @@
                 </table>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <div class="text-center">
+                    <div class="text-center bg-dark" >
                         <a href="/FeedBack/AddFB?boardGameId=@Model.BoardGameId" class="btn btn-primary">Thêm bình luận</a>
                     </div>
                 }
                 else
                 {
                     <div class="text-center">
-                        <a href="/dang-nhap" class="btn btn-primary">Đăng nhập để thêm bình luận</a>
+                        <a href="/dang-nhap" class="btn btn-dark">Đăng nhập để thêm bình luận</a>
                     </div>
                 }
             </div>
