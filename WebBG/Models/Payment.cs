@@ -15,7 +15,7 @@ public partial class Payment
     public int? UserId { get; set; }
 
     [Display(Name = "Số tiền")]
-    public decimal Amount { get; set; }
+    public decimal? Amount { get; set; }
 
     [Display(Name = "Mã giao dịch")]
     public string? TransactionId { get; set; }

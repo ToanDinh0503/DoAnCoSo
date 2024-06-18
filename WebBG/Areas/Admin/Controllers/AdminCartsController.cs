@@ -26,23 +26,24 @@ namespace WebBG.Areas.Admin.Controllers
         // GET: Admin/AdminCarts
         public async Task<IActionResult> Index(string SearchString = "")
         {
-            if (SearchString != "")
-            {
-                var searchedData = _context.Carts.Include(b => b.User).Where(x => x.CartId.ToUpper().Contains(SearchString.ToUpper()));
-                return View(searchedData);
-            }
-
-            Hashtable statuses =  new Hashtable();
+            Hashtable statuses = new Hashtable();
             statuses.Add(1, "Chờ xác nhận");
             statuses.Add(2, "Đã xác nhận");
             statuses.Add(3, "Đang giao hàng");
             statuses.Add(4, "Đã nhận hàng");
             statuses.Add(0, "Đã huỷ");
 
+            if (SearchString != "")
+            {
+                var searchedData = _context.Carts.Include(b => b.User).Where(x => x.CartId.ToUpper().Contains(SearchString.ToUpper()));
+                ViewBag.MyHashTable = statuses;
+
+                return View(searchedData);
+            }
+
             ViewBag.MyHashTable = statuses;
-
-
             var webBgContext = await _context.Carts.Include(c => c.User).OrderByDescending(c => c.DateCreated).ToListAsync();
+
             return View(webBgContext);
         }
 
@@ -164,6 +165,17 @@ namespace WebBG.Areas.Admin.Controllers
             {
                 try
                 {
+                    if(cart.Status == 4)
+                    {
+                        cart.isPaid = true;
+                        Payment payment = new Payment();
+                        payment.CartId = id;
+                        payment.Amount = cart.SubTotal - cart.DiscountedPrice;
+                        payment.UserId = cart.UserId;
+                        payment.PaymentDate = DateTime.Now;
+                        _context.Payments.Add(payment);
+                        _context.SaveChanges(true);
+                    }
                     _context.Update(cart);
                     await _context.SaveChangesAsync();
                 }
@@ -178,7 +190,7 @@ namespace WebBG.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return Redirect("~/Admin/AdminCarts/Index");
+                return Redirect("~/Admin/AdminCarts/Details?id=" + cart.CartId);
             }
             var users = await _context.Users.ToListAsync();
             ViewBag.Users = new SelectList(users, "UserId", "Username");

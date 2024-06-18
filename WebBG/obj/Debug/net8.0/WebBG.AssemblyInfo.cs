@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebBG")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+386c6f28a0c38fbdc2842ae5e58c06a967f41f3f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e96c234310fa59a98a5915059caee9b6bf5e8ecb")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebBG")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebBG")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

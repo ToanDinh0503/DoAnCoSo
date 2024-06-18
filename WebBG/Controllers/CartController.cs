@@ -322,13 +322,24 @@ namespace WebBG.Controllers
 
                     }
 
+                   /* var promoCode = _context.Promotion.SingleOrDefault(p => p.PromoCode == PromoCode);
+                    Payment payment = new Payment();
+                    payment.CartId = id;
+                    payment.Amount = order.SubTotal - order.DiscountedPrice;
+                    payment.PromoId = promoCode.PromoId;
+                    payment.UserId = order.UserId;
+                    payment.PaymentDate = DateTime.Now;
+                    _context.Payments.Add(payment);
+                    _context.SaveChanges(true);*/
 
-                    var promoCode = _context.Promotion.SingleOrDefault(p => p.PromoCode == PromoCode);
+
                 }
                 catch (Exception ex)
                 {
                     throw;
                 }
+
+
                 return Redirect("/hoan-thanh/");
             }
         }
@@ -481,13 +492,17 @@ namespace WebBG.Controllers
                         _context.SaveChanges();
                     }
                 }
+               
+                
                 payment.CartId = id;
-                payment.PaymentDate = order.DateCreated;
+                payment.Amount = order.SubTotal - order.DiscountedPrice;
                 payment.UserId = order.UserId;
+                payment.PaymentDate = DateTime.Now;
+                _context.Payments.Add(payment);
+                _context.SaveChanges(true);
                 //payment.PromoId = promoCode != null ? promoCode.PromoId : null;
 
-                _context.Payments.Add(payment);
-                _context.SaveChanges();
+          
             }
             catch (Exception ex)
             {
