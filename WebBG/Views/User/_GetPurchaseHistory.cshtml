@@ -122,7 +122,10 @@
                     @if(!(item.Status == 0 || item.Status == 3 || item.Status == 4))
                     {
                         <td>
-                            <a href="/xac-nhan-huy/@item.CartId">Huỷ</a>
+                            <form asp-controller="Cart" asp-action="CancelOrder" method="post">
+                                <input type="hidden" name="id" value="@item.CartId" />
+                                <button type="submit" class="btn btn-danger" onclick="confirmCancel(event)">Hủy</button>
+                            </form>
                         </td>
                     }
                     else
@@ -165,6 +168,10 @@
 
      
     });
-
+    function confirmCancel(event) {
+        if (!confirm("Bạn có chắc chắn muốn hủy đơn hàng này không?")) {
+            event.preventDefault();
+        }
+    }
     
 </script>

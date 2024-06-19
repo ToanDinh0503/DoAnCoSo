@@ -165,7 +165,7 @@ namespace WebBG.Areas.Admin.Controllers
             {
                 try
                 {
-                    if(cart.Status == 4)
+                    if(cart.Status == 4 && cart.PaymentMethod == "Thanh toán khi nhận hàng")
                     {
                         cart.isPaid = true;
                         Payment payment = new Payment();
