@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GhoPWyioYgSfXf0vEZk0ZVB5cgM4dcMSqs0jFHarZdc=",
+  "Hash": "LncOXoNHD45xcaFrWsSF7hiyuK7DbB4MZZdMe/yV4UY=",
   "Source": "WebBG",
   "BasePath": "_content/WebBG",
   "Mode": "Default",
@@ -17286,6 +17286,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\codename3.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Chi Bao\\source\\repos\\DoAnCoSo\\WebBG\\wwwroot\\images\\coup.jpg",
+      "SourceId": "WebBG",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Chi Bao\\source\\repos\\DoAnCoSo\\WebBG\\wwwroot\\",
+      "BasePath": "_content/WebBG",
+      "RelativePath": "images/coup.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\coup.jpg"
     },
     {
       "Identity": "C:\\Users\\Chi Bao\\source\\repos\\DoAnCoSo\\WebBG\\wwwroot\\images\\Descent1 (1).jpg",
