@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol;
 using WebBG.Models;
 using WebBG.ViewModels;
 
@@ -44,6 +45,8 @@ namespace WebBG.Controllers
             ModelState.Remove("FB.User");
             ModelState.Remove("FB.BoardGame");
             ModelState.Remove("Bg");
+
+            var findBoardgame = await _context.BoardGames.FirstOrDefaultAsync(b => b.BoardGameId == fbViewModel.Fb.BoardGameId);
             if (ModelState.IsValid)
             {
                 var feedback = new Feedback
@@ -58,7 +61,7 @@ namespace WebBG.Controllers
                 _context.Feedbacks.Add(feedback);
                 await _context.SaveChangesAsync();
             }
-            return Redirect("/san-pham");
+            return Redirect("/san-pham/" + findBoardgame.Link+"-"+findBoardgame.BoardGameId);
         }
     }
 }

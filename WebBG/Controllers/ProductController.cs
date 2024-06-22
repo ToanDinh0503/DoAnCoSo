@@ -186,7 +186,7 @@ namespace WebBG.Controllers
 
 
             var products = await productsQuery
-                .OrderBy(p => p.BoardGameId)
+                .OrderByDescending(p => p.Quantity)
                 .Skip((page - 1) * productsPerPage)
                 .Take(productsPerPage)
                 .ToListAsync();
